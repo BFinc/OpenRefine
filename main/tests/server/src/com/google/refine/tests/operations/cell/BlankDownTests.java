@@ -19,6 +19,7 @@ import com.google.refine.operations.cell.BlankDownOperation;
 import com.google.refine.process.Process;
 import com.google.refine.tests.RefineTest;
 import com.google.refine.tests.util.TestUtils;
+import com.google.refine.util.ParsingUtilities;
 
 public class BlankDownTests extends RefineTest {
     
@@ -50,7 +51,7 @@ public class BlankDownTests extends RefineTest {
                 + "\"description\":\"Blank down cells in column my column\","
                 + "\"engineConfig\":{\"mode\":\"record-based\",\"facets\":[]},"
                 + "\"columnName\":\"my column\"}";
-        AbstractOperation op = BlankDownOperation.reconstruct(project, new JSONObject(json));
+        AbstractOperation op = ParsingUtilities.mapper.readValue(json, BlankDownOperation.class);
         TestUtils.isSerializedTo(op, json);
     }
     
